@@ -1,0 +1,8 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "homePageTitle": "Acasa",
+  "homePageUrl": "/ro/",
+  "homePageDescription": "Descriere foarte SEO friendly",
+  "switchToRomanian": "Română",
+  "switchToEnglish": "Engleză"
+}

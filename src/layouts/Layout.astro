@@ -1,22 +1,77 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+// Styles
+import '../styles/global.css';
+// Fonts
+import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/raleway';
+import '@fontsource-variable/nunito';
+// Astro Components
+import LanguagePicker from '../components/LanguagePicker.astro';
+import { SEO } from 'astro-seo';
+// i18n
+import * as m from '../paraglide/messages';
+import { languageTag } from '../paraglide/runtime';
+import { delocalizePathname } from '../lib/delocalizePathname';
+import { localizePathname } from '../lib/localizePathname';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+export interface Props {
+  title: string;
+  description: string;
+  children: any;
+}
+
+const locale = languageTag();
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale} dir='ltr'>
+  <head>
+    <SEO
+      title={title}
+      titleDefault='Devigeon'
+      description={description}
+      titleTemplate='%s - Devigeon'
+    />
+    <meta charset='UTF-8' />
+    <meta content='width=device-width' name='viewport' />
+    <link href='/favicon.svg' rel='icon' type='image/svg+xml' />
+    {/* Links to same page but in different language. */}
+    <link
+      rel='alternate'
+      hreflang='ro'
+      href={new URL(
+        localizePathname(`/${delocalizePathname(Astro.url.pathname)}`, 'ro'),
+        Astro.url.origin,
+      )}
+    />
+    <link
+      rel='alternate'
+      hreflang='en'
+      href={new URL(
+        localizePathname(`/${delocalizePathname(Astro.url.pathname)}`, 'en'),
+        Astro.url.origin,
+      )}
+    />
+    {/* Script that contains JSON-DL. */}
+    <slot name='json-ld' />
+    <meta name='generator' content={Astro.generator} />
+    <link href='/pagefind/pagefind-ui.css' rel='stylesheet' />
+    <script is:inline src='/pagefind/pagefind-ui.js'></script>
+  </head>
+  <body>
+    <nav>
+      <a href={`${Astro.url.origin}${m.homePageUrl()}`}></a>
+      <LanguagePicker />
+    </nav>
+    <slot />
+    <div id='search'></div>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        // @ts-ignore
+        new PagefindUI({ element: '#search', showSubResults: true });
+      });
+    </script>
+  </body>
+</html>

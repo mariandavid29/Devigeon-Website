@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-heading: 'Raleway Variable', sans-serif;
+  --font-body: 'Nunito Variable', sans-serif;
+  --font-accent: 'JetBrains Mono Variable', monospace;
+}
