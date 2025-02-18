@@ -7,7 +7,7 @@ export default {
   singleQuote: true,
   jsxSingleQuote: true,
   bracketSameLine: true,
-  plugins: ['prettier-plugin-astro'],
+  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   overrides: [
     {
       files: '*.astro',

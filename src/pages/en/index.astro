@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageName = 'Home';
+const pageDescription = 'Very SEO friendly description';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageName,
+  description: pageDescription,
+  url: Astro.url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Devigeon',
+    url: Astro.url.origin,
+    // Add Logo
+  },
+};
+---
+
+<Layout title={pageName} , description={pageDescription} , roPathname='/' , enPathname='/en'>
+  <h1>Hello World</h1>
+  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+</Layout>

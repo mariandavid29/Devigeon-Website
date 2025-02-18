@@ -3,26 +3,29 @@
 import '../styles/global.css';
 // Fonts
 import '@fontsource-variable/jetbrains-mono';
-import '@fontsource-variable/raleway';
 import '@fontsource-variable/nunito';
+import '@fontsource-variable/inter';
 // Astro Components
-import LanguagePicker from '../components/LanguagePicker.astro';
 import { SEO } from 'astro-seo';
+// React Components
+import LanguagePicker from '../components/LanguagePicker';
 // i18n
-import * as m from '../paraglide/messages';
-import { languageTag } from '../paraglide/runtime';
-import { delocalizePathname } from '../lib/delocalizePathname';
-import { localizePathname } from '../lib/localizePathname';
+import { useTranslation } from '../utils/i18n';
 
 export interface Props {
   title: string;
   description: string;
+  roPathname: string;
+  enPathname: string;
   children: any;
 }
 
-const locale = languageTag();
+const locale = Astro.currentLocale;
+const { title, description, roPathname, enPathname } = Astro.props;
 
-const { title, description } = Astro.props;
+const t = useTranslation(Astro.currentLocale as 'ro' | 'en');
+
+const displayLanguage = Astro.currentLocale === 'en' ? 'lang.en' : 'lang.ro';
 ---
 
 <!doctype html>
@@ -30,48 +33,36 @@ const { title, description } = Astro.props;
   <head>
     <SEO
       title={title}
-      titleDefault='Devigeon'
+      titleDefault='Devegion'
       description={description}
-      titleTemplate='%s - Devigeon'
+      titleTemplate='%s - Devegion'
     />
     <meta charset='UTF-8' />
     <meta content='width=device-width' name='viewport' />
     <link href='/favicon.svg' rel='icon' type='image/svg+xml' />
     {/* Links to same page but in different language. */}
-    <link
-      rel='alternate'
-      hreflang='ro'
-      href={new URL(
-        localizePathname(`/${delocalizePathname(Astro.url.pathname)}`, 'ro'),
-        Astro.url.origin,
-      )}
-    />
-    <link
-      rel='alternate'
-      hreflang='en'
-      href={new URL(
-        localizePathname(`/${delocalizePathname(Astro.url.pathname)}`, 'en'),
-        Astro.url.origin,
-      )}
-    />
+    <link rel='alternate' hreflang='ro' href={new URL(roPathname, Astro.url.origin)} />
+    <link rel='alternate' hreflang='en' href={new URL(enPathname, Astro.url.origin)} />
     {/* Script that contains JSON-DL. */}
     <slot name='json-ld' />
     <meta name='generator' content={Astro.generator} />
-    <link href='/pagefind/pagefind-ui.css' rel='stylesheet' />
-    <script is:inline src='/pagefind/pagefind-ui.js'></script>
   </head>
-  <body>
-    <nav>
-      <a href={`${Astro.url.origin}${m.homePageUrl()}`}></a>
-      <LanguagePicker />
+  <body class='font-body bg-primary-background text-primary-foreground'>
+    <nav class='bg-primary-dark-background text-primary-dark-foreground w-full py-4'>
+      <div class='mx-auto flex h-full w-[90%] items-center justify-between sm:w-[85%]'>
+        <a href={Astro.url.origin} class='font-heading text-lg font-bold sm:text-xl lg:text-2xl'
+          >Devegion</a
+        >
+        <LanguagePicker
+          displayLanguage={t(displayLanguage)}
+          enLink={{ text: t('lang.en'), url: new URL('/en', Astro.url.origin) }}
+          roLink={{ text: t('lang.ro'), url: new URL('/', Astro.url.origin) }}
+          client:load
+        />
+      </div>
     </nav>
-    <slot />
-    <div id='search'></div>
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        // @ts-ignore
-        new PagefindUI({ element: '#search', showSubResults: true });
-      });
-    </script>
+    <main>
+      <slot />
+    </main>
   </body>
 </html>

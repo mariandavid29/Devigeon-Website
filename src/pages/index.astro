@@ -1,1 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
 
+const pageName = 'Acasă';
+const pageDescription = 'Descriere foarte SEO friendly';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageName,
+  description: pageDescription,
+  url: Astro.url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Devegion',
+    url: Astro.url.origin,
+    // Add Logo
+  },
+};
+---
+
+<Layout title={pageName} , description={pageDescription} , roPathname='/' , enPathname='/en'>
+  <div class='flex min-h-[calc(100vh_-_76px)] flex-col'>
+    <!-- Hero -->
+    <section
+      class='bg-primary-dark-background text-primary-dark-foreground flex w-full flex-col items-center pt-16 pb-28 lg:pb-32'>
+      <div
+        class='w-[90%] max-w-sm space-y-3 text-center sm:w-[80%] md:w-min md:max-w-none md:text-left'>
+        <h1 class='font-heading text-2xl font-bold text-nowrap sm:text-3xl lg:text-4xl'>
+          Building Software,<br class='md:hidden' /> Shaping People.
+        </h1>
+        <p class='text-accent-dark-foreground'>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eius cumque, deleniti iusto
+          odio optio, iste quas earum sunt repellat ipsam maiores impedit quisquam accusamus.
+        </p>
+      </div>
+    </section>
+    <!-- Portal -->
+    <section class='relative mx-auto grid w-[90%] grid-cols-1 gap-14 sm:w-[85%] lg:grid-cols-3'>
+      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
+        <div
+          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
+          <h2 class='font-accent text-2xl font-black'>Mobile Development</h2>
+        </div>
+      </article>
+      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
+        <div
+          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
+          <h2 class='font-accent text-2xl font-black'>Mentoring</h2>
+        </div>
+      </article>
+      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
+        <div
+          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
+          <h2 class='font-accent text-2xl font-black'>Web Development</h2>
+        </div>
+      </article>
+    </section>
+  </div>
+  <!-- JSON-LD for SEO -->
+  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+</Layout>
