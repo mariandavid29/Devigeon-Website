@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageName = 'Dezvoltare Website';
+const pageDescription = 'Descriere foarte SEO friendly';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageName,
+  description: pageDescription,
+  url: Astro.url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Devegion',
+    url: Astro.url.origin,
+    // Add Logo
+  },
+};
+---
+
+<Layout
+  title={pageName}
+  description={pageDescription}
+  roPathname='/dezvoltare-website'
+  enPathname='/en/website-development'>
+  <!-- JSON-LD for SEO -->
+  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+</Layout>

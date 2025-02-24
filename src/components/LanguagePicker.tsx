@@ -8,9 +8,9 @@ const langSvg = (
     viewBox='0 0 24 24'
     fill='none'
     stroke='currentColor'
-    stroke-width='2'
-    stroke-linecap='round'
-    stroke-linejoin='round'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
     className='lucide lucide-languages stroke-accent-foreground'>
     <path d='m5 8 6 6' />
     <path d='m4 14 6-6 2-3' />
@@ -29,15 +29,15 @@ const downArrowSvg = (
     viewBox='0 0 24 24'
     fill='none'
     stroke='currentColor'
-    stroke-width='2'
-    stroke-linecap='round'
-    stroke-linejoin='round'
+    strokeWidth='2'
+    strokeLinecap='round'
+    strokeLinejoin='round'
     className='lucide lucide-chevron-down stroke-accent-foreground'>
     <path d='m6 9 6 6 6-6' />
   </svg>
 );
 
-export default function DropDown(props: Record<string, any>) {
+export default function LanguagePicker(props: Record<string, any>) {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger className='cursor-pointer rounded p-2 text-lg capitalize focus:ring focus:outline-0'>

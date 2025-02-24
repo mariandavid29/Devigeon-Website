@@ -1,7 +1,11 @@
 ---
+import Hero from '../components/Hero.astro';
+import PortalCard from '../components/PortalCard.astro';
 import Layout from '../layouts/Layout.astro';
+import ButtonText from '../components/ButtonText.astro';
+import PortalSection from '../components/PortalSection.astro';
 
-const pageName = 'Acasă';
+const pageName = 'Acasa';
 const pageDescription = 'Descriere foarte SEO friendly';
 
 const schema = {
@@ -20,42 +24,53 @@ const schema = {
 ---
 
 <Layout title={pageName} , description={pageDescription} , roPathname='/' , enPathname='/en'>
-  <div class='flex min-h-[calc(100vh_-_76px)] flex-col'>
+  <div
+    class='grid min-h-[calc(100vh_-_76px)] grid-cols-1 xl:grid-rows-[1fr_1.40fr] 2xl:grid-rows-[1fr_1.3fr]'>
     <!-- Hero -->
-    <section
-      class='bg-primary-dark-background text-primary-dark-foreground flex w-full flex-col items-center pt-16 pb-28 lg:pb-32'>
-      <div
-        class='w-[90%] max-w-sm space-y-3 text-center sm:w-[80%] md:w-min md:max-w-none md:text-left'>
-        <h1 class='font-heading text-2xl font-bold text-nowrap sm:text-3xl lg:text-4xl'>
-          Building Software,<br class='md:hidden' /> Shaping People.
+    <div class='bg-primary-dark-background h-full w-full pt-22 pb-36 xl:pt-0 xl:pb-14'>
+      <Hero>
+        <h1 slot='title' class='font-heading text-3xl font-bold text-nowrap xl:text-4xl'>
+          Construim Software,<br class='md:hidden' /> Formam Oameni.
         </h1>
-        <p class='text-accent-dark-foreground'>
+        <p slot='description' class='text-accent-dark-foreground text-center md:text-justify'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eius cumque, deleniti iusto
           odio optio, iste quas earum sunt repellat ipsam maiores impedit quisquam accusamus.
         </p>
-      </div>
-    </section>
+      </Hero>
+    </div>
     <!-- Portal -->
-    <section class='relative mx-auto grid w-[90%] grid-cols-1 gap-14 sm:w-[85%] lg:grid-cols-3'>
-      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
-        <div
-          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
-          <h2 class='font-accent text-2xl font-black'>Mobile Development</h2>
-        </div>
-      </article>
-      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
-        <div
-          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
-          <h2 class='font-accent text-2xl font-black'>Mentoring</h2>
-        </div>
-      </article>
-      <article class='relative h-[calc(100vh_-_410px)] min-h-[500px] w-full'>
-        <div
-          class='bg-primary-background shadow-primary-dark-background/30 absolute -top-16 flex h-full w-full items-center justify-center rounded-2xl shadow-xl'>
-          <h2 class='font-accent text-2xl font-black'>Web Development</h2>
-        </div>
-      </article>
-    </section>
+    <PortalSection>
+      <PortalCard slot='slot1' href='/aplicatii-telefon'>
+        <span class='' slot='title'>Aplicatii<br class='sm:hidden xl:inline' /> Telefon</span>
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Descopera</ButtonText>
+      </PortalCard>
+      <PortalCard slot='slot2' href='/mentorat'>
+        <span class='' slot='title'><br class='sm:hidden xl:inline' />Mentorat</span>\
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Descopera</ButtonText>
+      </PortalCard>
+      <PortalCard slot='slot3' href='/dezvoltare-website'>
+        <span class='' slot='title'>Dezvoltare<br class='sm:hidden xl:inline' /> Website</span>
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Descopera</ButtonText>
+      </PortalCard>
+    </PortalSection>
   </div>
   <!-- JSON-LD for SEO -->
   <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />

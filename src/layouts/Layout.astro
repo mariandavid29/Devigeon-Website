@@ -11,6 +11,8 @@ import { SEO } from 'astro-seo';
 import LanguagePicker from '../components/LanguagePicker';
 // i18n
 import { useTranslation } from '../utils/i18n';
+import LogoLink from '../components/LogoLink.astro';
+import NavLink from '../components/NavLink.astro';
 
 export interface Props {
   title: string;
@@ -49,16 +51,25 @@ const displayLanguage = Astro.currentLocale === 'en' ? 'lang.en' : 'lang.ro';
   </head>
   <body class='font-body bg-primary-background text-primary-foreground'>
     <nav class='bg-primary-dark-background text-primary-dark-foreground w-full py-4'>
-      <div class='mx-auto flex h-full w-[90%] items-center justify-between sm:w-[85%]'>
-        <a href={Astro.url.origin} class='font-heading text-lg font-bold sm:text-xl lg:text-2xl'
-          >Devegion</a
-        >
-        <LanguagePicker
-          displayLanguage={t(displayLanguage)}
-          enLink={{ text: t('lang.en'), url: new URL('/en', Astro.url.origin) }}
-          roLink={{ text: t('lang.ro'), url: new URL('/', Astro.url.origin) }}
-          client:load
-        />
+      <div
+        class='mx-auto grid h-full w-[90%] grid-cols-2 items-center sm:w-[85%] lg:grid-cols-[1fr_3fr_1fr]'>
+        <div class='justify-self-start'>
+          <LogoLink />
+        </div>
+        <div class='hidden items-center justify-center gap-10 lg:flex'>
+          <NavLink href={t('nav.contact.link')}>{t('nav.services')}</NavLink>
+          <NavLink href={t('nav.blog.link')}>{t('nav.blog')}</NavLink>
+          <NavLink href={t('nav.community.link')}>{t('nav.community')}</NavLink>
+          <NavLink href={t('nav.contact.link')}>{t('nav.contact')}</NavLink>
+        </div>
+        <div class='justify-self-end'>
+          <LanguagePicker
+            displayLanguage={t(displayLanguage)}
+            enLink={{ text: t('lang.en'), url: new URL('/en', Astro.url.origin) }}
+            roLink={{ text: t('lang.ro'), url: new URL('/', Astro.url.origin) }}
+            client:load
+          />
+        </div>
       </div>
     </nav>
     <main>

@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageName = 'Mobile Development';
+const pageDescription = 'Very SEO friendly description.';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageName,
+  description: pageDescription,
+  url: Astro.url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Devegion',
+    url: Astro.url.origin,
+    // Add Logo
+  },
+};
+---
+
+<Layout
+  title={pageName}
+  description={pageDescription}
+  roPathname='/aplicatii-telefon'
+  enPathname='/en/mobile-development'>
+  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+</Layout>

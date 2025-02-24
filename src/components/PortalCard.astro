@@ -1,0 +1,23 @@
+---
+export interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+---
+
+<article class='relative h-[400px] w-full max-w-xs sm:h-[300px] sm:max-w-4xl xl:h-full xl:max-w-md'>
+  <a
+    href={href}
+    class='bg-primary-background group absolute -top-14 flex h-full w-full items-center justify-center overflow-hidden rounded-xl p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all duration-300 ease-initial sm:px-12 xl:px-8 xl:py-16 xl:hover:-top-24 xl:hover:scale-105 xl:hover:shadow-xl'>
+    <div
+      class='mx-auto flex h-full w-[90%] flex-col items-center justify-center gap-8 sm:w-full sm:items-start xl:w-[90%] xl:max-w-xs xl:items-center xl:gap-10'>
+      <h2
+        class='font-heading text-center text-2xl font-black sm:text-start xl:text-center xl:text-3xl'>
+        <slot name='title' />
+      </h2>
+      <slot name='description' />
+
+      <slot name='button' />
+    </div>
+  </a>
+</article>

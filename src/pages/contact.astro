@@ -1,0 +1,45 @@
+---
+import Hero from '../components/Hero.astro';
+import Layout from '../layouts/Layout.astro';
+
+const pageName = 'Contact';
+const pageDescription = 'Descriere foarte SEO friendly';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageName,
+  description: pageDescription,
+  url: Astro.url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Devegion',
+    url: Astro.url.origin,
+    // Add Logo
+  },
+};
+---
+
+<Layout
+  title={pageName}
+  description={pageDescription}
+  roPathname='/contact'
+  enPathname='/en/contact'>
+  <div class='bg-primary-dark-background pt-22 pb-36'>
+    <Hero>
+      <h1 slot='title' class='font-heading text-3xl font-bold text-nowrap xl:text-4xl'>
+        Contacteaza-ne
+      </h1>
+    </Hero>
+  </div>
+  <section class='mx-auto flex w-[90%] max-w-[1400px] justify-center gap-4 sm:w-[85%]'>
+    <div>
+      <div>Telefon</div>
+      <div>Email</div>
+      <div></div>
+    </div>
+    <div>Form</div>
+  </section>
+  <!-- JSON-LD for SEO -->
+  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+</Layout>

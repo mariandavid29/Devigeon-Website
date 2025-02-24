@@ -1,5 +1,9 @@
 ---
+import Hero from '../../components/Hero.astro';
+import PortalCard from '../../components/PortalCard.astro';
 import Layout from '../../layouts/Layout.astro';
+import ButtonText from '../../components/ButtonText.astro';
+import PortalSection from '../../components/PortalSection.astro';
 
 const pageName = 'Home';
 const pageDescription = 'Very SEO friendly description';
@@ -12,7 +16,7 @@ const schema = {
   url: Astro.url,
   publisher: {
     '@type': 'Organization',
-    name: 'Devigeon',
+    name: 'Devegion',
     url: Astro.url.origin,
     // Add Logo
   },
@@ -20,6 +24,54 @@ const schema = {
 ---
 
 <Layout title={pageName} , description={pageDescription} , roPathname='/' , enPathname='/en'>
-  <h1>Hello World</h1>
-  <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+  <div
+    class='grid min-h-[calc(100vh_-_76px)] grid-cols-1 xl:grid-rows-[1fr_1.40fr] 2xl:grid-rows-[1fr_1.3fr]'>
+    <!-- Hero -->
+    <div class='bg-primary-dark-background h-full w-full pt-22 pb-36 xl:pt-0 xl:pb-14'>
+      <Hero>
+        <h1 slot='title' class='font-heading text-3xl font-bold text-nowrap xl:text-4xl'>
+          Building Software,<br class='md:hidden' /> Shaping People.
+        </h1>
+        <p slot='description' class='text-accent-dark-foreground text-center md:text-justify'>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error eius cumque, deleniti iusto
+          odio optio, iste quas earum sunt repellat ipsam maiores impedit quisquam accusamus.
+        </p>
+      </Hero>
+    </div>
+    <!-- Portal -->
+    <PortalSection>
+      <PortalCard slot='slot1' href='/aplicatii-telefon'>
+        <span class='' slot='title'>Mobile<br class='sm:hidden xl:inline' /> Development</span>
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Discover</ButtonText>
+      </PortalCard>
+      <PortalCard slot='slot2' href='/mentorat'>
+        <span class='' slot='title'><br class='sm:hidden xl:inline' />Mentoring</span>\
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Discover</ButtonText>
+      </PortalCard>
+      <PortalCard slot='slot3' href='/dezvoltare-website'>
+        <span class='' slot='title'>Website<br class='sm:hidden xl:inline' /> Development</span>
+        <p
+          class='text-accent-foreground text-center sm:text-start xl:text-center'
+          slot='description'>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur, ex corrupti harum
+          blanditiis quae nulla maxime sint dolorum eos. Rerum eligendi iure delectus ipsam ut!
+        </p>
+        <ButtonText slot='button'>Discover</ButtonText>
+      </PortalCard>
+    </PortalSection>
+    <!-- JSON-LD for SEO -->
+    <script is:inline slot='json-ld' type='application/ld+json' set:html={JSON.stringify(schema)} />
+  </div>
 </Layout>
